@@ -18,7 +18,9 @@ library(p8105.datasets)
 data("instacart")
 ```
 
-
+Instacart is an online grocery service that allows you to shop online from local stores. In New York City, partner stores include Whole Foods, Fairway, and The Food Emporium. Instacart offers same-day delivery, and items that users purchase are delivered within 2 hours.
+  
+This dataset describes the order history of  “The Instacart Online Grocery Shopping 2017”, which has 1384617 objects and 15 variables including order id, product id, user id, reordered, days since prior order, department id, etc.  
 
 
 
