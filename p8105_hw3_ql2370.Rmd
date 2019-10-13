@@ -21,18 +21,14 @@ data("instacart")
 Instacart is an online grocery service that allows you to shop online from local stores. In New York City, partner stores include Whole Foods, Fairway, and The Food Emporium. Instacart offers same-day delivery, and items that users purchase are delivered within 2 hours.
   
 This dataset describes the order history of  “The Instacart Online Grocery Shopping 2017”, which has 1384617 objects and 15 variables including order id, product id, user id, reordered, days since prior order, department id, etc.  
+  
+For example, the order with order id 1 added totally 8 items which 4 of them were reordered, and this order was placed on Thursday 10 am. The same user placed the prior order 9 days ago. Also, the detailed products information was included in this dataset.
 
 
 
 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
 
 ## Including Plots
 
