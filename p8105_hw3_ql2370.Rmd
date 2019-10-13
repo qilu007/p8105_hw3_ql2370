@@ -39,7 +39,7 @@ aisle_size
 aisle_max
 ```
   
-  a)There were 134 aisles, and the most itmes ordered from "fresh vegetables".
+  a) There were 134 aisles, and the most itmes ordered from "fresh vegetables".
   
 ```{r}
 
@@ -51,16 +51,27 @@ ggplot(aisle_plot, aes(x= aisle, y = n_aisle, color = aisle)) +
    theme(legend.position = "bottom")
 ```
   
-  This is the plot that shows the number of items ordered in each aisle, limiting this to aisles with more than 10000 items ordered.
+  b) This is the plot that shows the number of items ordered in each aisle, limiting this to aisles with more than 10000 items ordered.
+
+
+
+```{r}
+baking_data = instacart %>% 
+  filter(aisle == "baking ingredients" | aisle == "dog food care" | aisle == "packaged vegetables fruits") %>% 
+  group_by(aisle, product_name) %>% 
+  summarize(count = n()) %>% 
+  mutate(rank = rank(desc(count))) %>% 
+  filter(rank <= 3)
+
+baking_data
+
+```
+  
+  c) This is the table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
   
   
   
   
-  
-  
-  
-  
-Make a table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
 Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table)
 
 
