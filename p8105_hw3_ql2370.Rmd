@@ -5,8 +5,7 @@ date: "10/12/2019"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup}
 library(tidyverse)
 ```
 
@@ -16,6 +15,7 @@ library(tidyverse)
 ```{r}
 library(p8105.datasets)
 data("instacart")
+janitor::clean_names(instacart)
 ```
 
 Instacart is an online grocery service that allows you to shop online from local stores. In New York City, partner stores include Whole Foods, Fairway, and The Food Emporium. Instacart offers same-day delivery, and items that users purchase are delivered within 2 hours.
@@ -25,6 +25,43 @@ This dataset describes the order history of  “The Instacart Online Grocery Sho
 For example, the order with order id 1 added totally 8 items which 4 of them were reordered, and this order was placed on Thursday 10 am. The same user placed the prior order 9 days ago. Also, the detailed products information was included in this dataset.
 
 
+```{r}
+
+aisle_rank = instacart %>%
+  count(aisle, name = "n_aisle") %>% 
+  mutate(rank = min_rank(desc(n_aisle)))
+
+aisle_max = aisle_rank %>% 
+  filter(rank(desc(n_aisle)) == 1)
+
+aisle_size = count(aisle_rank)
+aisle_size
+aisle_max
+```
+  
+  a)There were 134 aisles, and the most itmes ordered from "fresh vegetables".
+  
+```{r}
+
+aisle_plot = aisle_rank %>% 
+  filter(n_aisle > 10000)
+
+ggplot(aisle_plot, aes(x= aisle, y = n_aisle, color = aisle)) + 
+  geom_point() +
+   theme(legend.position = "bottom")
+```
+  
+  This is the plot that shows the number of items ordered in each aisle, limiting this to aisles with more than 10000 items ordered.
+  
+  
+  
+  
+  
+  
+  
+  
+Make a table showing the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”. Include the number of times each item is ordered in your table.
+Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table)
 
 
 
