@@ -151,7 +151,35 @@ This is the two-panel plot showing, for the years 2006, and 2010, distribution o
   
   
 ## Problem 3
+```{r}
+library(dplyr)
+sheet_data = read_csv("./data/accel_data.csv")
+sheet_data = janitor::clean_names(sheet_data)
 
+#sheet_data = mutate(sheet_data, week_weekends = ifelse(day =="Saturday" | day == "Sunday", 1, 0))
+
+sheet_data$week_or_not <- sheet_data$week
+
+
+        
+
+
+```
+pols_month= mutate(pols_month, 
+       president = replace(president, prez_gop == "1","gop"),
+       president = replace(president, prez_gop == "2","gop"),
+        president = replace(president, prez_dem == "1","dem"),
+       president = replace(president, prez_dem == "2","dem"),)
+
+
+within(df, df$d <- ifelse(a<5, a, 
+                        ifelse(a==5, 0,
+                               ifelse(a==6,b,NA))) ) 
+
+
+Load, tidy, and otherwise wrangle the data. Your final dataset should include all originally observed variables and values; have useful variable names; include a weekday vs weekend variable; and encode data with reasonable variable classes. Describe the resulting dataset (e.g. what variables exist, how many observations, etc).
+Traditional analyses of accelerometer data focus on the total activity over the day. Using your tidied dataset, aggregate accross minutes to create a total activity variable for each day, and create a table showing these totals. Are any trends apparent?
+Accelerometer data allows the inspection activity over the course of the day. Make a single-panel plot that shows the 24-hour activity time courses for each day and use color to indicate day of the week. Describe in words any patterns or conclusions you can make based on this graph.
 
 
 
