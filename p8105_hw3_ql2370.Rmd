@@ -100,13 +100,42 @@ brfss_smart2010 = brfss_smart2010 %>%
 
 response_level = c("Poor","Good", "Fair", "Very good", "Excellent")
 brfss_smart2010$Response = ordered(brfss_smart2010$Response, response_level)
+```
 
+```{r}
+more_than_7_2002 = brfss_smart2010 %>% 
+  filter(Year == "2002") %>% 
+  group_by(Locationabbr) %>% 
+  summarize(n = n()) %>% 
+  filter(n > 7)
+```
+In 2002, those were states observed at 7 or more locations.
+  
+```{r}
+more_than_7_2010 = brfss_smart2010 %>% 
+  filter(Year == "2010") %>% 
+  group_by(Locationabbr) %>% 
+  summarize(n = n()) %>% 
+  filter(n > 7)
+```
+In 2010, those were states observed at 7 or more locations.
+
+```{r}
+excellent_resp = brfss_smart2010 %>% 
+  filter(Response == "Excellent") %>% 
+  group_by(Year, Locationabbr) %>% 
+  summarise( mean = mean(Data_value)) %>% 
+  drop_na()
+
+excellent_resp %>% 
+  ggplot(aes(x = Year, y = mean, color = Locationabbr)) + 
+    geom_point() + geom_line() + 
+    theme(legend.position = "bottom")
 
 
 ```
 
-In 2002, which states were observed at 7 or more locations? What about in 2010?
-Construct a dataset that is limited to Excellent responses, and contains, year, state, and a variable that averages the data_value across locations within a state. Make a “spaghetti” plot of this average value over time within a state (that is, make a plot showing a line for each state across years – the geom_line geometry and group aesthetic will help).
+
 Make a two-panel plot showing, for the years 2006, and 2010, distribution of data_value for responses (“Poor” to “Excellent”) among locations in NY State
 
 
