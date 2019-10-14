@@ -176,21 +176,30 @@ show_trend %>%
   geom_line()
 ```
 The trend is unconstant from the plot.
+  
+  
+  
+```{r}
+plot_df = 
+  pivot_longer(
+    sheet_data, 
+    activity_1:activity_1440,
+    names_to = "activity", 
+    values_to = "accel_data")
 
 
-Traditional analyses of accelerometer data focus on the total activity over the day. Using your tidied dataset, aggregate accross minutes to create a total activity variable for each day, and create a table showing these totals. Are any trends apparent?
-Accelerometer data allows the inspection activity over the course of the day. Make a single-panel plot that shows the 24-hour activity time courses for each day and use color to indicate day of the week. Describe in words any patterns or conclusions you can make based on this graph.
-
-
-
-
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+plot_df %>% 
+  ggplot(aes(x = activity, y = accel_data, color = week)) +
+  geom_line()
 ```
+  
+From this plot, I found that, in the five weeks, the accelerometer data started ok, and then increased rapidly. After that, it went lower again in the first half of acities. 
+  
+Also, I found that the higher figures were not from week 5 and 4.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
+
