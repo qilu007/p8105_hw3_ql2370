@@ -41,7 +41,7 @@ aisle_max
   
   a) There were 134 aisles, and the most itmes ordered from "fresh vegetables".
   
-```{r}
+```{r, fig.width=9}
 
 aisle_plot = aisle_rank %>% 
   filter(n_aisle > 10000)
@@ -120,7 +120,7 @@ more_than_7_2010 = brfss_smart2010 %>%
 ```
 In 2010, those were states observed at 7 or more locations.
 
-```{r}
+```{r, fig.height=10}
 excellent_resp = brfss_smart2010 %>% 
   filter(Response == "Excellent") %>% 
   group_by(Year, Locationabbr) %>% 
@@ -131,12 +131,27 @@ excellent_resp %>%
   ggplot(aes(x = Year, y = mean, color = Locationabbr)) + 
     geom_point() + geom_line() + 
     theme(legend.position = "bottom")
-
-
 ```
+  
+  
+This is the plot of this average value over time within a state.
+  
+```{r}
+NY_data_value = brfss_smart2010 %>% 
+  filter(Year == "2006" | Year == "2010" ) %>% 
+  filter(Locationabbr == "NY") 
 
+NY_data_value %>% 
+  ggplot(aes(x = Response, y = Data_value)) +
+  geom_boxplot() +
+  facet_grid(~Year)
+```
+This is the two-panel plot showing, for the years 2006, and 2010, distribution of data_value for responses (“Poor” to “Excellent”) among locations in NY State.
+  
+  
+  
+## Problem 3
 
-Make a two-panel plot showing, for the years 2006, and 2010, distribution of data_value for responses (“Poor” to “Excellent”) among locations in NY State
 
 
 
