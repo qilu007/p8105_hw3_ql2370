@@ -156,12 +156,16 @@ library(dplyr)
 sheet_data = read_csv("./data/accel_data.csv")
 sheet_data = janitor::clean_names(sheet_data)
 
-#sheet_data = mutate(sheet_data, week_weekends = ifelse(day =="Saturday" | day == "Sunday", 1, 0))
-
-sheet_data$week_or_not <- sheet_data$week
 
 
-        
+sheet_data["week_or_not"] <- "week"
+sheet_data$week_or_not[sheet_data$day == "Saturday"] <- "weekend"
+sheet_data$week_or_not[sheet_data$day == "Sunday"] <- "weekend"
+
+
+
+    
+
 
 
 ```
